@@ -14,57 +14,67 @@
 [![Twitter](https://img.shields.io/badge/Twitter-%40contiki__ng-blue?logo=twitter)](https://twitter.com/contiki_ng)
 
 
-Installation Instructions for LSM-RPL GitHub Source Code
+### Installation Instructions for LSM-RPL GitHub Source Code
 
-Introduction:
+**Introduction:** 
+
 Contiki-NG is an open-source, cross-platform operating system for Next-Generation IoT devices. It focuses on dependable (secure and reliable) low-power communication and standard protocols, such as IPv6/6LoWPAN, 6TiSCH, RPL, and CoAP. Contiki-NG comes with extensive documentation, tutorials, a roadmap, release cycle, and well-defined development flow for smooth integration of community contributions.
 
+LSM-RPL, or Lightweight Security Mode RPL, is a security enhancement for the Routing Protocol for Low-Power and Lossy Networks (RPL) within the Contiki-NG environment. This innovative technique focuses on bolstering the integrity and authenticity of RPL control messages, crucial for safeguarding IoT networks against various external and internal threats. 
 
-LSM-RPL, or Lightweight Security Mode RPL, is a security enhancement for the Routing Protocol for Low-Power and Lossy Networks (RPL) within the Contiki-NG environment. This innovative technique focuses on bolstering the integrity and authenticity of RPL control messages, crucial for safeguarding IoT networks against various external and internal threats.
-The key tenets of LSM-RPL involve the utilization of secret keys - a private key (Kpr) and a shared key (Ksh) - assigned to individual sensor nodes. These keys serve as the foundation for authenticating RPL control messages, thereby fortifying the network against unauthorized access and manipulation by external adversaries. Moreover, LSM-RPL employs Hashed Message Authentication Code (HMAC) techniques to sign RPL control messages, ensuring both their integrity and authenticity during transmission. By appending HMAC digests to these messages, LSM-RPL provides a robust mechanism for detecting and thwarting various forms of attacks, such as version and rank manipulation, which could compromise the stability and reliability of the RPL network.
- These instructions guide you through the process of setting up and testing LSM-RPL on your system.
+The key tenets of LSM-RPL involve the utilization of secret keys - a private key (Kpr) and a shared key (Ksh) - assigned to individual sensor nodes. These keys serve as the foundation for authenticating RPL control messages, thereby fortifying the network against unauthorized access and manipulation by external adversaries. Moreover, LSM-RPL employs Hashed Message Authentication Code (HMAC) techniques to sign RPL control messages, ensuring both their integrity and authenticity during transmission. 
 
+By appending HMAC digests to these messages, LSM-RPL provides a robust mechanism for detecting and thwarting various forms of attacks, such as version and rank manipulation, which could compromise the stability and reliability of the RPL network. 
 
-Prerequisites:
+These instructions guide you through the process of setting up and testing LSM-RPL on your system.
+
+**Prerequisites:**
 
 Ensure Contiki-NG OS and Cooja simulator are installed and functioning correctly.
 
-System Setup Verification:
+**System Setup Verification:**
 
--	Ensure that Contiki-NG OS and the Cooja simulator are installed and fully operational on your system.
--	Launch the Cooja simulator.
--	Open an existing simulation project to confirm functionality. For example, navigate to "\home\user\contiki-ng\examples\rpl-udp" and run the "rpl-udp-cooja.csc" file.
--	If the simulation project runs without errors, it indicates that both Contiki-NG OS and the Cooja simulator are correctly installed and operational, and you're ready to proceed with using LSM-RPL.
- 
+1. Ensure that Contiki-NG OS and the Cooja simulator are installed and fully operational on your system.
+2. Launch the Cooja simulator.
+3. Open an existing simulation project to confirm functionality. For example, navigate to "\home\user\contiki-ng\examples\rpl-udp" and run the "rpl-udp-cooja.csc" file.
+4. If the simulation project runs without errors, it indicates that both Contiki-NG OS and the Cooja simulator are correctly installed and operational, and you're ready to proceed with using LSM-RPL.
 
-Install and Test RPL-LSM:
--	Copy the "LSM.rar" file to the directory "\home\user\contiki-ng".
--	Extract the contents of the "LSM.rar" file into the same directory.
--	When prompted, select "Yes to all" to replace existing Contiki-NG files with the updated code.
--	Launch the Cooja simulator.
--	Navigate to the directory "\home\user\contiki-ng\LSM-example\Visualization\15_nodes_LSM".
--	Attempt to open the simulation project named "cooja.csc".
--	If the simulation project opens and runs without errors, congratulations! The installation of LSM-RPL was successful.
+**Install and Test RPL-LSM:**
 
-Activation and Deactivation of LSM-RPL:
-Open the "project-conf.h" file located within the project directory.
-Locate the macro named "CONF_LSM".
-Set the value of "CONF_LSM" to either 1 or 0 to activate or deactivate security protection using LSM-RPL, respectively.
-#define CONF_LSM 1 //  Lightweight Security Mode
+1. Copy the "LSM.rar" file to the directory "\home\user\contiki-ng".
+2. Extract the contents of the "LSM.rar" file into the same directory.
+3. When prompted, select "Yes to all" to replace existing Contiki-NG files with the updated code.
+4. Launch the Cooja simulator.
+5. Navigate to the directory "\home\user\contiki-ng\LSM-example\Visualization\15_nodes_LSM".
+6. Attempt to open the simulation project named "cooja.csc".
+7. If the simulation project opens and runs without errors, congratulations! The installation of LSM-RPL was successful.
 
-Activating Specific Attacks:
-1.	Enable Attack Macros:
-•	Open the "project-conf.h" file located within the project directory.
-•	Enable the corresponding macros related to the desired attacks by setting them to 1.
+**Activation and Deactivation of LSM-RPL:** 
 
-#define CONF_SFA 0 //  Selective Forward Attack
-#define CONF_VNA 0 //  Vesion Number Attack
-#define CONF_DRA 0 //  Decrease Rank Attack
-#define CONF_IRA 0 //  Increase Rank Attack
+1. Open the "project-conf.h" file located within the project directory.
+2. Locate the macro named "CONF_LSM".
+3. Set the value of "CONF_LSM" to either 1 or 0 to activate or deactivate security protection using LSM-RPL, respectively.
+   ```c
+   #define CONF_LSM 1 // Lightweight Security Mode
+   ```
 
-2.	Set Attack Parameters in JavaScript Control Code:
-•	Open the "coojalogger.js" file that manages simulation execution in Cooja.
-•	Define the start and end time of the attack, as well as the number of target nodes, using the provided syntax.
-attacks.push(new Attack("DRA_on", 16, 1, 3600000));// activate DRA for node 16 for 1 hours 
- attacks.push(new Attack("VNA_on", 17, 1, 3600000));// activate DRA for node 16 for 1 hours
+**Activating Specific Attacks:**
+
+1. **Enable Attack Macros:**
+   - Open the "project-conf.h" file located within the project directory.
+   - Enable the corresponding macros related to the desired attacks by setting them to 1.
+   ```c
+   #define CONF_SFA 0 // Selective Forward Attack
+   #define CONF_VNA 0 // Version Number Attack
+   #define CONF_DRA 0 // Decrease Rank Attack
+   #define CONF_IRA 0 // Increase Rank Attack
+   ```
+
+2. **Set Attack Parameters in JavaScript Control Code:** 
+   - Open the "coojalogger.js" file that manages simulation execution in Cooja.
+   - Define the start and end time of the attack, as well as the number of target nodes, using the provided syntax.
+   ```javascript
+   attacks.push(new Attack("DRA_on", 16, 1, 3600000)); // Activate DRA for node 16 for 1 hour
+   attacks.push(new Attack("VNA_on", 17, 1, 3600000)); // Activate VNA for node 17 for 1 hour
+   ```
 
