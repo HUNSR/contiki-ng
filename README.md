@@ -97,3 +97,15 @@ From the generated log file ("COOJA.testlog"), extract all network performance e
 
 Repeat the Steps for Different Scenarios:
 Repeat the above steps with different network parameters, such as varying the number of malicious nodes, to generate different log files for comparison.
+
+## Analyzing Network Parameters
+
+Use the Python script "analysis.py" to extract numerical results representing network parameters from the generated log file.
+
+```bash
+python3 analysis.py
+```
+
+After running the above command, you will obtain several images representing results such as energy consumption, packet delivery rate, parent switches, total packets sent over time, and others.
+
+To obtain additional numerical values from the log file, you can utilize the debug mode when running the "analysis.py" file.
