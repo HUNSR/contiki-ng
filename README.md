@@ -89,9 +89,10 @@ Execute the network simulation in Cooja's no-GUI mode using the provided Python 
 Run the script in the terminal as follows:
 ```bash
 python3 run-cooja.py
+ ```
 The "run-cooja.py" script will execute the simulation file named "cooja.csc" and generate a log file named "COOJA.testlog" containing all the logs and events that occurred during the simulation.
 
-Extract Network Performance Evaluation from Log File:
+### Extract Network Performance Evaluation from Log File:
 From the generated log file ("COOJA.testlog"), extract all network performance evaluation metrics as explained in the next section.
 
 Repeat the Steps for Different Scenarios:
