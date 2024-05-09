@@ -78,3 +78,21 @@ Ensure Contiki-NG OS and Cooja simulator are installed and functioning correctly
    attacks.push(new Attack("VNA_on", 17, 1, 3600000)); // Activate VNA for node 17 for 1 hour
    ```
 
+
+## Comparing Network Scenarios
+
+### Set Network Parameters:
+To compare network scenarios, adjust the network parameters for each scenario according to your requirements.
+
+### Run Network Simulation in Cooja No-GUI Mode:
+Execute the network simulation in Cooja's no-GUI mode using the provided Python script "run-cooja.py".
+Run the script in the terminal as follows:
+```bash
+python3 run-cooja.py
+The "run-cooja.py" script will execute the simulation file named "cooja.csc" and generate a log file named "COOJA.testlog" containing all the logs and events that occurred during the simulation.
+
+Extract Network Performance Evaluation from Log File:
+From the generated log file ("COOJA.testlog"), extract all network performance evaluation metrics as explained in the next section.
+
+Repeat the Steps for Different Scenarios:
+Repeat the above steps with different network parameters, such as varying the number of malicious nodes, to generate different log files for comparison.
